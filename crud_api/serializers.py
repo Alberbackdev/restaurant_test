@@ -1,10 +1,14 @@
 from rest_framework import serializers
+import csv
 from .models import *
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = "__all__"
+        fields = ('id', 'file')
+
+    
+
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:

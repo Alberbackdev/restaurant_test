@@ -1,9 +1,12 @@
 from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
-from rest_framework.parsers import MultiPartParser, JSONParser
+from rest_framework.parsers import MultiPartParser, FileUploadParser
+from rest_framework_csv.parsers import CSVParser
+from rest_framework_csv.renderers import CSVRenderer
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
+import csv
 
 
 class AllDataView(viewsets.ModelViewSet):
@@ -11,13 +14,11 @@ class AllDataView(viewsets.ModelViewSet):
     permission_classes = (permissions.AllowAny,)
     serializer_class = RestaurantSerializer
 
+
 class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
-    parser_classes = [MultiPartParser, JSONParser, ]
+    parser_classes = [MultiPartParser, FileUploadParser, ]
 
-    with open(queryset) as csvfile:
-        reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-    for row in reader:
-        print(', '.join(row))
+    
         
