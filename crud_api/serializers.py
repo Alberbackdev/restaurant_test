@@ -1,5 +1,4 @@
 from rest_framework import serializers
-import csv
 from .models import *
 
 class FileSerializer(serializers.ModelSerializer):
@@ -8,8 +7,6 @@ class FileSerializer(serializers.ModelSerializer):
         fields = ('id', 'file')
 
     
-
-
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
